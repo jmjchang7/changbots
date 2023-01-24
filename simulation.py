@@ -20,7 +20,7 @@ class SIMULATION:
         self.robot.Prepare_To_Sense()
 
     def Run(self):
-        for t in range(1000):
+        for t in range(100):
             time.sleep(1/60)
             p.stepSimulation()
             self.robot.Sense(t)
