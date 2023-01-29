@@ -7,3 +7,5 @@ phaseOffset_BL = 0
 amplitude_FL = numpy.pi/4
 frequency_FL = 15
 phaseOffset_FL = numpy.pi/4
+
+numberOfGenerations = 10
