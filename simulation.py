@@ -25,7 +25,7 @@ class SIMULATION:
         self.robot.Prepare_To_Sense()
 
     def Run(self):
-        for t in range(100):
+        for t in range(500):
             if self.directOrGUI == "GUI":
                 time.sleep(1/60)
             p.stepSimulation()
