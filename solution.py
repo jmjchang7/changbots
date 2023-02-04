@@ -20,10 +20,7 @@ class SOLUTION:
         while not os.path.exists("fitness" + str(self.myID) + ".txt"):
             time.sleep(0.01)
         fitnessFile = open("fitness" + str(self.myID) + ".txt", "r")
-        f = fitnessFile.read()
-        if len(f) > 0:
-            self.fitness = float(f)
-            fitnessFile.close()
+        self.fitness = float(fitnessFile.read())
         fitnessFile.close()
         os.system("rm fitness" + str(self.myID) + ".txt")
 
