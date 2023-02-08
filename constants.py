@@ -1,17 +1,17 @@
 import numpy
 
-amplitude_BL = numpy.pi/3.5
-frequency_BL = 20
-phaseOffset_BL = 0
+amplitude_BL = numpy.pi/4
+frequency_BL = 50
+phaseOffset_BL = numpy.pi/4
 
-amplitude_FL = numpy.pi/4
-frequency_FL = 15
-phaseOffset_FL = numpy.pi/4
+amplitude_FL = 4
+frequency_FL = 10
+phaseOffset_FL = 0
 
 numberOfGenerations = 10
 populationSize = 10
 
-numSensorNeurons = 9
-numMotorNeurons = 8
+numSensorNeurons = 10
+numMotorNeurons = 9
 
-motorJointRange = 0.2
+motorJointRange = 0.4
