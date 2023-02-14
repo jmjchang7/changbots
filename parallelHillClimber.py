@@ -16,6 +16,7 @@ class PARALLEL_HILL_CLIMBER:
 
     def Evolve(self):
         self.Evaluate(self.parents)
+        print('done')
         
         for currentGeneration in range(c.numberOfGenerations):
             self.Evolve_For_One_Generation()
@@ -31,7 +32,7 @@ class PARALLEL_HILL_CLIMBER:
         self.children = {}
         for key in self.parents:
             self.children[key] = copy.deepcopy(self.parents[key])
-            self.children[key].Set_ID(self.nextAvailableID)
+            self.children[key].Set_ID(self.nextAvailableID) 
             self.nextAvailableID += 1
 
     def Mutate(self):
