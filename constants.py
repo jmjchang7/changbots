@@ -12,8 +12,8 @@ phaseOffset_FL = 0
 numberOfGenerations = 1
 populationSize = 1
 
-numLinks = random.randint(4, 8)
-numJoints = numLinks - 1
+numLinks = 8
+numJoints = 7
 
 numSensorNeurons = random.randint(1, numLinks-1)
 
@@ -22,4 +22,4 @@ random.shuffle(SensorIndexList)
 
 numMotorNeurons = numJoints
 
-motorJointRange = 1
+motorJointRange = 0.5

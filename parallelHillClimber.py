@@ -15,8 +15,7 @@ class PARALLEL_HILL_CLIMBER:
 
 
     def Evolve(self):
-        self.Evaluate(self.parents)
-        print('done')
+        self.Evaluate(self.parents) #CURRENT ERROR
         
         for currentGeneration in range(c.numberOfGenerations):
             self.Evolve_For_One_Generation()
@@ -65,4 +64,4 @@ class PARALLEL_HILL_CLIMBER:
             solutions[key].Start_Simulation("DIRECT")
         
         for key in solutions:
-            solutions[key].Wait_For_Simulation_To_End()
+            solutions[key].Wait_For_Simulation_To_End() #CURRENT ERROR!!
