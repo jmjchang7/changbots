@@ -35,7 +35,11 @@ class SOLUTION:
         startX,startY,startZ = 0,0,0
         self.dimensionsList = [] #list of lists that holds dimensions for each cube in order. For example, 0 index is [x dim, y dim, z dim]
         self.positionsList = [] #list of ([position list], "Name") that holds positions and name of each cube AND link in order. 
-
+        self.armList = [0] * c.numLinks # list of hwo many arms each snake link has
+        for i in c.numLinks:
+            self.armList[i] = random.randint(0, 2)
+        
+        
         # make dimensions and positions of each randomized link + its respective joint
         linkCount = 0
         for linkN in range(c.numLinks):
@@ -51,6 +55,18 @@ class SOLUTION:
                 linkCount += 1
             elif linkN < (c.numLinks - 1):
                 self.positionsList.append([[sizeX/2, 0, 0], "Link" + str(linkCount)]) #next link
+
+                if self.armList[linkN] == 0:
+                    pass
+                elif self.armList[linkN] == 1:
+                    pass
+                else:
+                    pass
+
+                # MAKE 0, 1, or 2 ARMS
+                    # For each arm:
+                        # Attach one or two legs
+
                 self.positionsList.append([[sizeX, 0, 0], "Link" + str(linkCount) + "_Link" + str(linkCount + 1)]) #next joint
                 linkCount += 1
             elif linkN == (c.numLinks - 1):
