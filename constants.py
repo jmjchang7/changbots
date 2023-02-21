@@ -12,7 +12,7 @@ phaseOffset_FL = 0
 numberOfGenerations = 1
 populationSize = 1
 
-numLinks = random.randint(4, 8)
+numLinks = random.randint(4, 6)
 numJoints = numLinks - 1
 
 numSensorNeurons = random.randint(1, numLinks-1)
