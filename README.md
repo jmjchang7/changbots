@@ -28,5 +28,23 @@ As can be seen on the diagram, the formation of legs on each arm of a spinal uni
 ## Brain Generation:
 ![IMG_2B480D5020CD-1](https://user-images.githubusercontent.com/120343561/220411380-6b2ea42c-117f-4dc5-a5ff-a5745487aae9.jpeg)
 
+The brain is made of a netowrk of synapses, connecting sensor and motor neurons of the creature.
+1. A random subset of all links (spinal units, arms, and legs) is chosen to be sensor neurons.
+2. ALL joints are motor neurons.
+3. The sensor identity is stored in respective lists for each category (spinal unit, arm, or leg). After constructing the whole creature, this list is iterated through in order to make the brain network, as shown in the diagram above.
+
+Since the sensor neurons are placed randomly, the brain's intelligence could vary greatly: a brain could be built on sensors on the spine, arms, or legs. A sensor on a leg could affect a motor on the same leg, or a leg on a completely different spinal unit.
+
+## Morphospace:
+Possible body shapes and movements:
+1. **Snake**: if no arms (and thus legs) are generated, the creature will resemble the same creature as created in Assignment 6.
+2. **Lizard**: if arms are generated on both sides of a spinal unit (without legs), the creature will resemble a 2-D lizard.
+3. **Horse**: if legs are generated (on both sides) on an arm, the creature will resemble a 3-D horse.
+
+The snake will slither in the XY plane.
+The lizard will do the same.
+The horse, though, will use its legs to walk forward.
+
+
 
 
