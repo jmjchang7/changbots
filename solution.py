@@ -32,9 +32,13 @@ class SOLUTION:
     def Create_Body(self):
 
         # initialize variables
-        startX,startY,startZ = 0,0,0
+        startX,startY,startZ = 0,0,10
         self.dimensionsList = [] #list of lists that holds dimensions for each cube in order. For example, 0 index is [x dim, y dim, z dim]
         self.positionsList = [] #list of ([position list], "Name") that holds positions and name of each cube AND link in order. 
+        
+        self.dirList = [0]*c.numLinks #directions
+        for i in range(c.numLinks):
+            self.dirList[i]= random.randint(0,2)
 
         # make dimensions and positions of each randomized link + its respective joint
         linkCount = 0
@@ -47,14 +51,50 @@ class SOLUTION:
             if linkN == 0:
                 startZ = sizeZ/2
                 self.positionsList.append([[startX, startY, startZ], "Link" + str(linkCount)]) # first link
-                self.positionsList.append([[sizeX/2, startY, startZ], "Link" + str(linkCount) + "_Link" + str(linkCount + 1)]) # first joint
+                # first joint
+                if self.dirList[linkCount] == 0:
+                    self.positionsList.append([[startX + sizeX/2, startY, startZ], "Link" + str(linkCount) + "_Link" + str(linkCount + 1)])
+                elif self.dirList[linkCount] == 1:
+                    self.positionsList.append([[startX, startY + sizeY/2, startZ], "Link" + str(linkCount) + "_Link" + str(linkCount + 1)])
+                elif self.dirList[linkCount] == 2:
+                    self.positionsList.append([[startX, startY, startZ + sizeZ/2], "Link" + str(linkCount) + "_Link" + str(linkCount + 1)])
                 linkCount += 1
+            
             elif linkN < (c.numLinks - 1):
-                self.positionsList.append([[sizeX/2, 0, 0], "Link" + str(linkCount)]) #next link
-                self.positionsList.append([[sizeX, 0, 0], "Link" + str(linkCount) + "_Link" + str(linkCount + 1)]) #next joint
+                # set link/joint positions using previous direction
+                if self.dirList[linkCount-1] == 0:
+                    cubeX, cubeY, cubeZ = sizeX/2, 0, 0
+                    jointX, jointY, jointZ = sizeX/2, 0, 0
+                elif self.dirList[linkCount-1] == 1:
+                    cubeX, cubeY, cubeZ = 0, sizeY/2, 0
+                    jointX, jointY, jointZ = 0, sizeY/2, 0
+                else:
+                    cubeX, cubeY, cubeZ = 0, 0, sizeZ/2
+                    jointX, jointY, jointZ = 0, 0, sizeZ/2
+
+                # set joint positions using current direction
+                if self.dirList[linkCount] == 0:
+                    jointX = jointX + sizeX/2
+                elif self.dirList[linkCount] == 1:
+                    jointY = jointY + sizeY/2
+                else:
+                    jointZ = jointZ + sizeZ/2
+
+                # send next link and joint
+                self.positionsList.append([[cubeX, cubeY, cubeZ], "Link" + str(linkCount)])
+                self.positionsList.append([[jointX, jointY, jointZ], "Link" + str(linkCount) + "_Link" + str(linkCount + 1)])
+
                 linkCount += 1
             elif linkN == (c.numLinks - 1):
-                self.positionsList.append([[sizeX/2, 0, 0], "Link" + str(linkCount)]) #last link (has no next joint)
+                #last link (has no next joint)
+                if self.dirList[linkCount-1] == 0:
+                    self.positionsList.append([[sizeX/2, 0, 0], "Link" + str(linkCount)])
+                    
+                elif self.dirList[linkCount] == 1:
+                    self.positionsList.append([[0, sizeY/2, 0], "Link" + str(linkCount)])
+                    
+                else:
+                    self.positionsList.append([[0, 0, sizeZ/2], "Link" + str(linkCount)])
 
         # now actually make the "Cubes" and "Joints"
         for linkN in range(c.numLinks-1):
