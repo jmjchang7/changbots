@@ -1,6 +1,8 @@
 import numpy
 import random
 
+runTime = 4000
+
 amplitude_BL = numpy.pi/4
 frequency_BL = 50
 phaseOffset_BL = numpy.pi/4
