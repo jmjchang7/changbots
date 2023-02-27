@@ -32,7 +32,7 @@ class SOLUTION:
     def Create_Body(self):
 
         # initialize variables
-        startX,startY,startZ = 0,0,3
+        self.startX,self.startY,self.startZ = 0,0,5
         self.dimensionsList = [] #list of lists that holds dimensions for each cube in order. For example, 0 index is [x dim, y dim, z dim]
         self.positionsList = [] #list of ([position list], "Name") that holds positions and name of each cube AND link in order. 
         
@@ -47,7 +47,7 @@ class SOLUTION:
         self.legPosList = [] #list of ([x_pos, y_pos, z_pos], "Name") for legs AND leg joints
           
         # make dimensions and positions of each randomized link + its respective joint
-        linkCount = 0
+        self.linkCount = 0
         self.armCount = 0
         self.legCount = 0
         for linkN in range(c.numLinks):
@@ -57,14 +57,11 @@ class SOLUTION:
             self.dimensionsList.append([sizeX, sizeY, sizeZ])
 
             if linkN == 0: # first link
-                self.positionsList.append([[startX, startY, startZ + sizeZ/2], "Link" + str(linkCount)]) # first link
-                self.positionsList.append([[sizeX/2, startY, startZ + sizeZ/2], "Link" + str(linkCount) + "_Link" + str(linkCount + 1)]) # first joint
-                linkCount += 1
-
-            elif linkN < (c.numLinks - 1): # links between first and last link
+                self.positionsList.append([[self.startX, self.startY, self.startZ + sizeZ/2], "Link" + str(self.linkCount)]) # first link
                 
-                self.positionsList.append([[sizeX/2, 0, 0], "Link" + str(linkCount)]) # makes specified link
-
+                self.positionsList.append([[sizeX/2, self.startY, self.startZ + sizeZ/2], "Link" + str(self.linkCount) + "_Link" + str(self.linkCount + 1)]) # first joint
+                
+                # Not using regular Make_Arm method since first arm joint will have absolute position!
                 if self.armList[linkN] == 0: # no arms
                     pass
                 elif self.armList[linkN] == 1: # 1 arm
@@ -72,17 +69,28 @@ class SOLUTION:
 
                     y_dir = random.randint(0, 1) # decide direction of single arm
 
-                    self.Make_Single_Arm(linkCount, self.armCount, armDims, sizeX, sizeY, y_dir)
+                    self.Make_First_Single_Arm(armDims, sizeY, sizeZ, y_dir)
 
                 elif self.armList[linkN] == 2: # 2 arms
                     armDims = self.Generate_Arm_Dims(sizeX)
 
-                    self.Make_Both_Arms(linkCount, self.armCount, armDims, sizeX, sizeY)
+                    self.Make_First_Both_Arms(armDims, sizeY, sizeZ)
+                
+                self.linkCount += 1
 
-                self.positionsList.append([[sizeX, 0, 0], "Link" + str(linkCount) + "_Link" + str(linkCount + 1)]) #next joint
-                linkCount += 1
+            elif linkN < (c.numLinks - 1): # links between first and last link
+                
+                self.positionsList.append([[sizeX/2, 0, 0], "Link" + str(self.linkCount)]) # makes specified link
+
+                self.Make_Arm(linkN, sizeX, sizeY) # make arm(s)
+
+                self.positionsList.append([[sizeX, 0, 0], "Link" + str(self.linkCount) + "_Link" + str(self.linkCount + 1)]) #next joint
+                self.linkCount += 1
+
             elif linkN == (c.numLinks - 1): # last link
-                self.positionsList.append([[sizeX/2, 0, 0], "Link" + str(linkCount)]) #last link (has no next joint)
+                self.positionsList.append([[sizeX/2, 0, 0], "Link" + str(self.linkCount)]) #last link (has no next joint)
+
+                self.Make_Arm(linkN, sizeX, sizeY) # make arm(s)
 
         # now actually make the "Cubes" and "Joints"
         # SENSOR LISTS FOR ARMS
@@ -106,7 +114,7 @@ class SOLUTION:
                     currentLink += 1
                 else: # if Joint
                     pyrosim.Send_Joint(name = positionI[1] , parent= positionI[1].split('_')[0] , child = positionI[1].split('_')[1] , type = "revolute", position = positionI[0], jointAxis = "0 0 1")
-            linkCount = 0
+            # self.linkCount = 0
 
             currentArm = 0
             for positionI in self.armPosList: # EACH ARM 
@@ -118,7 +126,7 @@ class SOLUTION:
                     currentArm += 1
                 else: # if Joint
                     pyrosim.Send_Joint(name = positionI[1] , parent= positionI[1].split('_')[0] , child = positionI[1].split('_')[1] , type = "revolute", position = positionI[0], jointAxis = "0 1 0")
-            self.armCount = 0
+            # self.armCount = 0
 
             currentLeg = 0
             for positionI in self.legPosList: # EACH ARM 
@@ -130,7 +138,7 @@ class SOLUTION:
                     currentLeg += 1
                 else: # if Joint
                     pyrosim.Send_Joint(name = positionI[1] , parent= positionI[1].split('_')[0] , child = positionI[1].split('_')[1] , type = "fixed", position = positionI[0], jointAxis = "0 1 0")
-            self.legCount = 0
+            # self.legCount = 0
 
         pyrosim.End()
 
@@ -185,8 +193,8 @@ class SOLUTION:
         z = random.random()*2 + 1
 
         return [x, y, z]
-
-    def Make_Single_Arm(self, linkCount, armCount, armDims, sizeX, sizeY, y_dir):
+    
+    def Make_First_Single_Arm(self, armDims, sizeY, sizeZ, y_dir):
         self.armDimsList.append(armDims)
 
         if y_dir == 0:
@@ -195,30 +203,30 @@ class SOLUTION:
             y_factor = -1
         
         if y_dir == 0: # arm in positive y direction
-            self.armPosList.append([[sizeX/2, sizeY/2*y_factor, 0], "Link" + str(linkCount) + "_Arm" + str(armCount)])
-            self.armPosList.append([[0, armDims[1]/2*y_factor, 0], "Arm" + str(armCount)])
+            self.armPosList.append([[self.startX, self.startY + sizeY/2, self.startZ + sizeZ/2], "Link" + str(self.linkCount) + "_Arm" + str(self.armCount)])
+            self.armPosList.append([[0, armDims[1]/2*y_factor, 0], "Arm" + str(self.armCount)])
             leg_chance = random.randint(0, 1)
             
             if leg_chance == 0:
                 pass
             else:
                 legDims = self.Generate_Leg_Dims(armDims[1])
-                self.Make_Leg(armCount, self.legCount, legDims, armDims, y_factor)
+                self.Make_Leg(legDims, armDims, y_factor)
 
         else: # arm in negative y direction
-            self.armPosList.append([[sizeX/2, sizeY/2*y_factor, 0], "Link" + str(linkCount) + "_Arm" + str(armCount)])
-            self.armPosList.append([[0, armDims[1]/2*y_factor, 0], "Arm" + str(armCount)])
+            self.armPosList.append([[self.startX, self.startY + sizeY/2, self.startZ + sizeZ/2], "Link" + str(self.linkCount) + "_Arm" + str(self.armCount)])
+            self.armPosList.append([[0, armDims[1]/2*y_factor, 0], "Arm" + str(self.armCount)])
             leg_chance = random.randint(0, 1)
             
             if leg_chance == 0:
                 pass
             else:
                 legDims = self.Generate_Leg_Dims(armDims[1])
-                self.Make_Leg(armCount, self.legCount, legDims, armDims, y_factor)
+                self.Make_Leg(legDims, armDims, y_factor)
         
         self.armCount += 1
 
-    def Make_Both_Arms(self, linkCount, armCount, armDims, sizeX, sizeY):
+    def Make_First_Both_Arms(self, armDims, sizeY, sizeZ):
         for i in range(2):
             if i == 0:
                 y_factor = 1
@@ -226,7 +234,7 @@ class SOLUTION:
                 y_factor = -1
 
             self.armDimsList.append(armDims)
-            self.armPosList.append([[sizeX/2, sizeY/2*y_factor, 0], "Link" + str(linkCount) + "_Arm" + str(self.armCount)])
+            self.armPosList.append([[self.startX, self.startY+sizeY/2*y_factor, self.startZ + sizeZ/2], "Link" + str(self.linkCount) + "_Arm" + str(self.armCount)])
             self.armPosList.append([[0, armDims[1]/2*y_factor, 0], "Arm" + str(self.armCount)])
 
             leg_chance = random.randint(0, 1)  
@@ -234,13 +242,80 @@ class SOLUTION:
                 pass
             else:
                 legDims = self.Generate_Leg_Dims(armDims[1])
-                self.Make_Leg(self.armCount, self.legCount, legDims, armDims, y_factor)
+                self.Make_Leg(legDims, armDims, y_factor)
+
+            self.armCount += 1
+    
+    def Make_Arm(self, linkN, sizeX, sizeY):
+        if self.armList[linkN] == 0: # no arms
+                    pass
+        elif self.armList[linkN] == 1: # 1 arm
+            armDims = self.Generate_Arm_Dims(sizeX)
+
+            y_dir = random.randint(0, 1) # decide direction of single arm
+
+            self.Make_Single_Arm(armDims, sizeX, sizeY, y_dir)
+
+        elif self.armList[linkN] == 2: # 2 arms
+            armDims = self.Generate_Arm_Dims(sizeX)
+
+            self.Make_Both_Arms(armDims, sizeX, sizeY)
+
+    def Make_Single_Arm(self, armDims, sizeX, sizeY, y_dir):
+        self.armDimsList.append(armDims)
+
+        if y_dir == 0:
+            y_factor = 1
+        else:
+            y_factor = -1
+        
+        if y_dir == 0: # arm in positive y direction
+            self.armPosList.append([[sizeX/2, sizeY/2*y_factor, 0], "Link" + str(self.linkCount) + "_Arm" + str(self.armCount)])
+            self.armPosList.append([[0, armDims[1]/2*y_factor, 0], "Arm" + str(self.armCount)])
+            leg_chance = random.randint(0, 1)
+            
+            if leg_chance == 0:
+                pass
+            else:
+                legDims = self.Generate_Leg_Dims(armDims[1])
+                self.Make_Leg(legDims, armDims, y_factor)
+
+        else: # arm in negative y direction
+            self.armPosList.append([[sizeX/2, sizeY/2*y_factor, 0], "Link" + str(self.linkCount) + "_Arm" + str(self.armCount)])
+            self.armPosList.append([[0, armDims[1]/2*y_factor, 0], "Arm" + str(self.armCount)])
+            leg_chance = random.randint(0, 1)
+            
+            if leg_chance == 0:
+                pass
+            else:
+                legDims = self.Generate_Leg_Dims(armDims[1])
+                self.Make_Leg(legDims, armDims, y_factor)
+        
+        self.armCount += 1
+
+    def Make_Both_Arms(self, armDims, sizeX, sizeY):
+        for i in range(2):
+            if i == 0:
+                y_factor = 1
+            else:
+                y_factor = -1
+
+            self.armDimsList.append(armDims)
+            self.armPosList.append([[sizeX/2, sizeY/2*y_factor, 0], "Link" + str(self.linkCount) + "_Arm" + str(self.armCount)])
+            self.armPosList.append([[0, armDims[1]/2*y_factor, 0], "Arm" + str(self.armCount)])
+
+            leg_chance = random.randint(0, 1)  
+            if leg_chance == 0:
+                pass
+            else:
+                legDims = self.Generate_Leg_Dims(armDims[1])
+                self.Make_Leg(legDims, armDims, y_factor)
 
             self.armCount += 1
 
-    def Make_Leg(self, armCount, legCount, legDims, armDims, y_factor):
+    def Make_Leg(self, legDims, armDims, y_factor):
         self.legDimsList.append(legDims)
 
-        self.legPosList.append([[0, y_factor*(self.armDimsList[armCount][1]-legDims[1]/2), -armDims[2]/2], "Arm" + str(armCount) + "_Leg" + str(legCount)])
-        self.legPosList.append([[0, 0, -legDims[2]/2], "Leg" + str(legCount)])
+        self.legPosList.append([[0, y_factor*(self.armDimsList[self.armCount][1]-legDims[1]/2), -armDims[2]/2], "Arm" + str(self.armCount) + "_Leg" + str(self.legCount)])
+        self.legPosList.append([[0, 0, -legDims[2]/2], "Leg" + str(self.legCount)])
         self.legCount += 1
