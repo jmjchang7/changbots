@@ -16,6 +16,7 @@ class SIMULATION:
             self.physicsClient = p.connect(p.GUI)
         
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
+        p.configureDebugVisualizer(p.COV_ENABLE_GUI,0)
         p.setGravity(0,0,-9.8)
 
         self.world = WORLD()
@@ -27,7 +28,7 @@ class SIMULATION:
     def Run(self):
         for t in range(1000):
             if self.directOrGUI == "GUI":
-                time.sleep(1/60)
+                time.sleep(1/100)
             p.stepSimulation()
             self.robot.Sense(t)
             self.robot.Think()

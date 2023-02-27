@@ -129,7 +129,7 @@ class SOLUTION:
                         pyrosim.Send_Cube(name = positionI[1], pos=positionI[0], size=self.legDimsList[currentLeg])
                     currentLeg += 1
                 else: # if Joint
-                    pyrosim.Send_Joint(name = positionI[1] , parent= positionI[1].split('_')[0] , child = positionI[1].split('_')[1] , type = "revolute", position = positionI[0], jointAxis = "0 1 0")
+                    pyrosim.Send_Joint(name = positionI[1] , parent= positionI[1].split('_')[0] , child = positionI[1].split('_')[1] , type = "fixed", position = positionI[0], jointAxis = "0 1 0")
             self.legCount = 0
 
         pyrosim.End()
@@ -173,16 +173,16 @@ class SOLUTION:
 
         x = (random.random() * 0.5 + 0.5) * sizeX
         y = random.random() + 0.5
-        z = random.random() + 0.5
+        z = random.random()*2 + 0.5
 
         return [x, y, z]
 
-    def Generate_Leg_Dims(self, armX):
+    def Generate_Leg_Dims(self, armY):
         # LEG Y Dimension CAN'T be wider than the current arm's y dim!
 
         x = random.random() + 0.5
-        y = random.random() + 0.5
-        z = random.random() + 0.5
+        y = (random.random() * 0.5 + 0.5) * armY * 0.5
+        z = random.random()*2 + 1
 
         return [x, y, z]
 
