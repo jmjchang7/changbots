@@ -6,6 +6,7 @@ import pybullet as p
 import time
 import pybullet_data
 import pyrosim.pyrosim as pyrosim
+import constants as c
 
 class SIMULATION:
     def __init__(self, directOrGUI, solutionID):
@@ -26,9 +27,9 @@ class SIMULATION:
         self.robot.Prepare_To_Sense()
 
     def Run(self):
-        for t in range(1000):
+        for t in range(c.runTime):
             if self.directOrGUI == "GUI":
-                time.sleep(1/100)
+                time.sleep(1/300)
             p.stepSimulation()
             self.robot.Sense(t)
             self.robot.Think()
