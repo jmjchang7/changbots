@@ -7,7 +7,7 @@ phaseOffset_BL = numpy.pi/4
 
 amplitude_FL = 4
 frequency_FL = 50
-phaseOffset_FL = 0
+phaseOffset_FL = numpy.pi/2
 
 numberOfGenerations = 1
 populationSize = 1
@@ -22,4 +22,4 @@ random.shuffle(SensorIndexList)
 
 numMotorNeurons = numJoints
 
-motorJointRange = 1
+motorJointRange = 0.5
