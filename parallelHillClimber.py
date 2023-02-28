@@ -13,7 +13,6 @@ class PARALLEL_HILL_CLIMBER:
             self.parents[key] = SOLUTION(self.nextAvailableID)
             self.nextAvailableID += 1
 
-
     def Evolve(self):
         self.Evaluate(self.parents)
         print('done')
@@ -63,6 +62,9 @@ class PARALLEL_HILL_CLIMBER:
     def Evaluate(self, solutions):
         for key in solutions:
             solutions[key].Start_Simulation("DIRECT")
+        print('should see this printed once')
         
         for key in solutions:
             solutions[key].Wait_For_Simulation_To_End()
+        print()
+        print('should see this printed once again')
