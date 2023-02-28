@@ -18,7 +18,7 @@ class SOLUTION:
 
     def Wait_For_Simulation_To_End(self):
         while not os.path.exists("fitness" + str(self.myID) + ".txt"):
-            time.sleep(0.01)
+            time.sleep(0.001)
         fitnessFile = open("fitness" + str(self.myID) + ".txt", "r")
         self.fitness = float(fitnessFile.read())
         fitnessFile.close()
@@ -30,7 +30,6 @@ class SOLUTION:
         pyrosim.End()
 
     def Create_Body(self):
-
         # initialize variables
         self.startX,self.startY,self.startZ = 0,0,5
         self.dimensionsList = [] #list of lists that holds dimensions for each cube in order. For example, 0 index is [x dim, y dim, z dim]
@@ -103,7 +102,7 @@ class SOLUTION:
             self.legSensorList.append(random.randint(0, 1))   
 
         for linkN in range(c.numLinks-1):
-            pyrosim.Start_URDF("body.urdf")
+            pyrosim.Start_URDF("body" + str(self.myID) + ".urdf")
             currentLink = 0
             for positionI in self.positionsList: # EACH JOINT IN SPINE
                 if "_" not in positionI[1]: # if not Joint
@@ -114,7 +113,7 @@ class SOLUTION:
                     currentLink += 1
                 else: # if Joint
                     pyrosim.Send_Joint(name = positionI[1] , parent= positionI[1].split('_')[0] , child = positionI[1].split('_')[1] , type = "revolute", position = positionI[0], jointAxis = "0 0 1")
-            # self.linkCount = 0
+            self.linkCount = 0
 
             currentArm = 0
             for positionI in self.armPosList: # EACH ARM 
@@ -126,7 +125,7 @@ class SOLUTION:
                     currentArm += 1
                 else: # if Joint
                     pyrosim.Send_Joint(name = positionI[1] , parent= positionI[1].split('_')[0] , child = positionI[1].split('_')[1] , type = "revolute", position = positionI[0], jointAxis = "0 1 0")
-            # self.armCount = 0
+            self.armCount = 0
 
             currentLeg = 0
             for positionI in self.legPosList: # EACH ARM 
@@ -138,7 +137,7 @@ class SOLUTION:
                     currentLeg += 1
                 else: # if Joint
                     pyrosim.Send_Joint(name = positionI[1] , parent= positionI[1].split('_')[0] , child = positionI[1].split('_')[1] , type = "fixed", position = positionI[0], jointAxis = "0 1 0")
-            # self.legCount = 0
+            self.legCount = 0
 
         pyrosim.End()
 
