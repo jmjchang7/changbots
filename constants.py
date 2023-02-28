@@ -1,18 +1,22 @@
 import numpy
 import random
 
-runTime = 4000
+runTime = 1000
 
-amplitude_BL = numpy.pi/4
-frequency_BL = 50
-phaseOffset_BL = numpy.pi/4
+# amplitude_BL = numpy.pi/4
+# frequency_BL = 50
+# phaseOffset_BL = numpy.pi/4
 
-amplitude_FL = 4
-frequency_FL = 50
-phaseOffset_FL = numpy.pi/2
+# amplitude_FL = 4
+# frequency_FL = 50
+# phaseOffset_FL = numpy.pi/2
 
-numberOfGenerations = 1
-populationSize = 1
+amplitude = numpy.pi/8
+frequency = 50
+phaseOffset = 0
+
+numberOfGenerations = 5
+populationSize = 5
 
 numLinks = random.randint(3, 5)
 numJoints = numLinks - 1
@@ -24,4 +28,4 @@ random.shuffle(SensorIndexList)
 
 numMotorNeurons = numJoints
 
-motorJointRange = 0.5
+motorJointRange = 1
