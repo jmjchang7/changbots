@@ -22,6 +22,7 @@ class SIMULATION:
 
         self.world = WORLD()
         self.robot = ROBOT(solutionID)
+        print('hello?')
 
         pyrosim.Prepare_To_Simulate(self.robot.robotId)
         self.robot.Prepare_To_Sense()
@@ -33,7 +34,7 @@ class SIMULATION:
             p.stepSimulation()
             self.robot.Sense(t)
             self.robot.Think()
-            self.robot.Act(t)
+            self.robot.Act()
 
     def Get_Fitness(self):
         self.robot.Get_Fitness()
