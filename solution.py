@@ -1,4 +1,3 @@
-import numpy
 import pyrosim.pyrosim as pyrosim
 import os
 import random
@@ -7,12 +6,13 @@ import constants as c
 
 class SOLUTION:
     def __init__(self, nextAvailableID):
-        self.weights = numpy.random.rand(c.numSensorNeurons, c.numMotorNeurons) * 2 - 1
+        self.weights = [[random.random() * 2 - 1 for _ in range(c.numMotorNeurons)] for _ in range(c.numSensorNeurons)]
         self.myID = nextAvailableID
 
     def Start_Simulation(self, directOrGUI):
         self.Create_World()
         self.Create_Body()
+        self.Send_Body()
         self.Send_Brain()
         os.system("python3 simulate.py " + directOrGUI + " " + str(self.myID) + " 2&>1 &")
 
@@ -31,7 +31,7 @@ class SOLUTION:
 
     def Create_Body(self):
         # initialize variables
-        self.startX,self.startY,self.startZ = 0,0,5
+        self.startX,self.startY,self.startZ = 0,0,3
         self.dimensionsList = [] #list of lists that holds dimensions for each cube in order. For example, 0 index is [x dim, y dim, z dim]
         self.positionsList = [] #list of ([position list], "Name") that holds positions and name of each cube AND link in order. 
         
@@ -50,9 +50,9 @@ class SOLUTION:
         self.armCount = 0
         self.legCount = 0
         for linkN in range(c.numLinks):
-            sizeX = random.random()*1.4 + 1
-            sizeY = random.random()*0.7 + 1
-            sizeZ = random.random()*1.1 + 1
+            [sizeX, sizeY, sizeZ] = self.Generate_Link_Dims()
+            if linkN == 0:
+                sizeX += c.mutator
             self.dimensionsList.append([sizeX, sizeY, sizeZ])
 
             if linkN == 0: # first link
@@ -91,6 +91,7 @@ class SOLUTION:
 
                 self.Make_Arm(linkN, sizeX, sizeY) # make arm(s)
 
+    def Send_Body(self):
         # now actually make the "Cubes" and "Joints"
         # SENSOR LISTS FOR ARMS
         self.armSensorList = []
@@ -136,7 +137,7 @@ class SOLUTION:
                         pyrosim.Send_Cube(name = positionI[1], pos=positionI[0], size=self.legDimsList[currentLeg])
                     currentLeg += 1
                 else: # if Joint
-                    pyrosim.Send_Joint(name = positionI[1] , parent= positionI[1].split('_')[0] , child = positionI[1].split('_')[1] , type = "fixed", position = positionI[0], jointAxis = "0 1 0")
+                    pyrosim.Send_Joint(name = positionI[1] , parent= positionI[1].split('_')[0] , child = positionI[1].split('_')[1] , type = "revolute", position = positionI[0], jointAxis = "0 1 0")
             self.legCount = 0
 
         pyrosim.End()
@@ -170,26 +171,35 @@ class SOLUTION:
         randomRow = random.randint(0, c.numSensorNeurons-1)
         randomColumn = random.randint(0, c.numMotorNeurons-1)
 
-        self.weights[randomRow,randomColumn] = random.random() * 2 - 1
+        self.weights[randomRow][randomColumn] = random.random() * 2 - 1
+
+        c.mutator *= random.random() + 0.1
 
     def Set_ID(self, nextAvailableID):
         self.myID = nextAvailableID
+
+    def Generate_Link_Dims(self):
+        x = random.random()*0.5 + 0.5
+        y = random.random()*0.5 + 0.5
+        z = random.random()*0.5 + 0.5
+
+        return [x, y, z]
 
     def Generate_Arm_Dims(self, sizeX):
         # ARM X Dimension CAN'T be wider than the current snake link's x dim!
 
         x = (random.random() * 0.5 + 0.5) * sizeX
-        y = random.random() + 0.5
-        z = random.random()*2 + 0.5
+        y = random.random() * 0.5 + 0.5
+        z = random.random() * 0.5 + 0.5
 
         return [x, y, z]
 
-    def Generate_Leg_Dims(self, armY):
+    def Generate_Leg_Dims(self, spineX, armY):
         # LEG Y Dimension CAN'T be wider than the current arm's y dim!
 
-        x = random.random() + 0.5
-        y = (random.random() * 0.5 + 0.5) * armY * 0.5
-        z = random.random()*2 + 1
+        x = (random.random() * 0.5 + 0.5) * spineX
+        y = (random.random() * 0.5 + 0.5) * armY
+        z = random.random()* 0.5 + 0.5
 
         return [x, y, z]
     
@@ -209,7 +219,7 @@ class SOLUTION:
             if leg_chance == 0:
                 pass
             else:
-                legDims = self.Generate_Leg_Dims(armDims[1])
+                legDims = self.Generate_Leg_Dims(armDims[0], armDims[1])
                 self.Make_Leg(legDims, armDims, y_factor)
 
         else: # arm in negative y direction
@@ -220,7 +230,7 @@ class SOLUTION:
             if leg_chance == 0:
                 pass
             else:
-                legDims = self.Generate_Leg_Dims(armDims[1])
+                legDims = self.Generate_Leg_Dims(armDims[0], armDims[1])
                 self.Make_Leg(legDims, armDims, y_factor)
         
         self.armCount += 1
@@ -240,7 +250,7 @@ class SOLUTION:
             if leg_chance == 0:
                 pass
             else:
-                legDims = self.Generate_Leg_Dims(armDims[1])
+                legDims = self.Generate_Leg_Dims(armDims[0], armDims[1])
                 self.Make_Leg(legDims, armDims, y_factor)
 
             self.armCount += 1
@@ -276,7 +286,7 @@ class SOLUTION:
             if leg_chance == 0:
                 pass
             else:
-                legDims = self.Generate_Leg_Dims(armDims[1])
+                legDims = self.Generate_Leg_Dims(sizeX, armDims[1])
                 self.Make_Leg(legDims, armDims, y_factor)
 
         else: # arm in negative y direction
@@ -287,7 +297,7 @@ class SOLUTION:
             if leg_chance == 0:
                 pass
             else:
-                legDims = self.Generate_Leg_Dims(armDims[1])
+                legDims = self.Generate_Leg_Dims(sizeX, armDims[1])
                 self.Make_Leg(legDims, armDims, y_factor)
         
         self.armCount += 1
@@ -307,7 +317,7 @@ class SOLUTION:
             if leg_chance == 0:
                 pass
             else:
-                legDims = self.Generate_Leg_Dims(armDims[1])
+                legDims = self.Generate_Leg_Dims(sizeX, armDims[1])
                 self.Make_Leg(legDims, armDims, y_factor)
 
             self.armCount += 1
