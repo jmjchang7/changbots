@@ -45,6 +45,8 @@ The snake will slither in the XY plane.
 The lizard will do the same.
 The horse, though, will use its legs to walk forward.
 
+## Evolution:
+![IMG_513E169B6442-1](https://user-images.githubusercontent.com/120343561/222047972-49510b1e-adfc-4505-a580-d233f10cd555.jpeg)
 
-
+The spinal units are mutated by a mutator factor, which changes their size. This factor is changed during each generation. This has a possibility of improving the movement of the creature.
 
