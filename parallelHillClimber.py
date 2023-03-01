@@ -2,12 +2,16 @@ from solution import SOLUTION
 import constants as c
 import copy
 import os
+import numpy as np
+import matplotlib.pyplot as plt
 
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
         os.system("rm brain*.nndf")
         os.system("rm fitness*.txt")
         self.parents = {}
+        self.fitnessValues = np.empty([c.numberOfGenerations+1, c.populationSize])
+        self.currentGeneration = 0
         self.nextAvailableID = 0
         for key in range(c.populationSize):
             self.parents[key] = SOLUTION(self.nextAvailableID)
@@ -15,7 +19,7 @@ class PARALLEL_HILL_CLIMBER:
 
     def Evolve(self):
         self.Evaluate(self.parents)
-        print('done')
+        self.Store_Fitness()
         
         for currentGeneration in range(c.numberOfGenerations):
             self.Evolve_For_One_Generation()
@@ -26,6 +30,7 @@ class PARALLEL_HILL_CLIMBER:
         self.Evaluate(self.children)
         self.Print()
         self.Select()
+        self.Store_Fitness()
 
     def Spawn(self):
         self.children = {}
@@ -40,8 +45,13 @@ class PARALLEL_HILL_CLIMBER:
 
     def Select(self):
         for key in self.parents:
-            if self.parents[key].fitness > self.children[key].fitness:
+            if abs(self.parents[key].fitness) < abs(self.children[key].fitness):
                 self.parents[key] = self.children[key]
+
+    def Store_Fitness(self):
+        for key in self.parents:
+            self.fitnessValues[self.currentGeneration][key] = self.parents[key].fitness
+        self.currentGeneration += 1
 
     def Print(self):
         print("\n")
@@ -50,21 +60,35 @@ class PARALLEL_HILL_CLIMBER:
         print("\n")
 
     def Show_Best(self):
-        min = self.parents[0].fitness
-        minKey = 0
+        max = self.parents[0].fitness
+        maxKey = 0
         for key in self.parents:
-            if self.parents[key].fitness < min:
-                min = self.parents[key].fitness
-                minKey = key
+            if abs(self.parents[key].fitness) > max:
+                max = self.parents[key].fitness
+                maxKey = key
         
-        self.parents[minKey].Start_Simulation("GUI")
+        self.parents[maxKey].Start_Simulation("GUI")
 
     def Evaluate(self, solutions):
         for key in solutions:
             solutions[key].Start_Simulation("DIRECT")
-        print('should see this printed once')
         
         for key in solutions:
             solutions[key].Wait_For_Simulation_To_End()
-        print()
-        print('should see this printed once again')
+
+    def Get_Fitness_Curve(self):
+        self.fitnessValues = abs(self.fitnessValues)
+        return np.max(self.fitnessValues, axis=1)
+
+    def Plot_Fitness_Curves(self):
+        print(self.fitnessCurves)
+        for i in range(c.numSeeds):
+            plt.plot(range(c.numberOfGenerations+1), self.fitnessCurves[i], label='Seed ' + str(i + 1))
+
+        plt.xlabel('Generation')
+        plt.ylabel('Fitness')
+        plt.title('Evolution Curves')
+
+        plt.legend()
+        plt.show()
+        plt.savefig('curve.png')
