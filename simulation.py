@@ -3,6 +3,7 @@ from world import WORLD
 from robot import ROBOT
 
 import pybullet as p
+import constants as c
 import time
 import pybullet_data
 import pyrosim.pyrosim as pyrosim
@@ -16,6 +17,7 @@ class SIMULATION:
             self.physicsClient = p.connect(p.GUI)
         
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
+        p.configureDebugVisualizer(p.COV_ENABLE_GUI,0)
         p.setGravity(0,0,-9.8)
 
         self.world = WORLD()
@@ -25,9 +27,9 @@ class SIMULATION:
         self.robot.Prepare_To_Sense()
 
     def Run(self):
-        for t in range(500):
+        for t in range(c.runTime):
             if self.directOrGUI == "GUI":
-                time.sleep(1/60)
+                time.sleep(1/300)
             p.stepSimulation()
             self.robot.Sense(t)
             self.robot.Think()
