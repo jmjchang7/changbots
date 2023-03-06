@@ -1,5 +1,7 @@
 import numpy
 
+runTime = 4000
+
 amplitude_BL = numpy.pi/3.5
 frequency_BL = 20
 phaseOffset_BL = 0
