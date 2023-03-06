@@ -22,7 +22,6 @@ class SIMULATION:
 
         self.world = WORLD()
         self.robot = ROBOT(solutionID)
-        print('hello?')
 
         pyrosim.Prepare_To_Simulate(self.robot.robotId)
         self.robot.Prepare_To_Sense()
