@@ -102,6 +102,7 @@ The parallel hill climber model is the means by which changbots evolve.
 4. This process repeats for however many generations exist.
 5. At the end of the process, each robot in its population represents the most fit of its "species," or column. 
 6. The most fit robot of all is selected as the **best robot**. 
+7. This whole process can be repeated! Each run of the parallel hill climber is called a **seed**. So if there were 5 seeds, imagine 5 of these diagrams running each after the other.
 
 ## Results:
 
