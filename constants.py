@@ -13,7 +13,7 @@ runTime = 4000
 
 mutator = 0.05
 
-numSeeds = 5
+numSeeds = 1
 
 amplitude = numpy.pi/4
 frequency = 10
