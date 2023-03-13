@@ -121,6 +121,11 @@ The parallel hill climber model is the means by which changbots evolve.
 7. This whole process can be repeated! Each run of the parallel hill climber is called a **seed**. So if there were 5 seeds, imagine 5 of these diagrams running each after the other.
 
 ## Results:
+The simulation was run for 5 seeds on two occasions, totaling to 10 seeds. Each run contained a population size of 10, and lasted for 50 generations.
+The total amount of times run thus amounted to: 10 pop x 100 gen x 10 seeds = 10,000 simulations.  
+   
+Each 10 pop x 10 gen run took about 2 minutes, so the total time was around 200 minutes, or 3 hours and 20 minutes.
+50,000 simulations would have taken around 16 hours and 40 minutes. This was not realistic for me to run, as I had to use my computer to study for other finals before the project deadline 😭. However, a good representation of the evolution process was still shown.
 
 Insert graphs here
 
