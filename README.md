@@ -1,20 +1,32 @@
 # changbots
 
-## Body Generation:
+##### Table of Contents  
+[Intro](#intro)  
+[Body Generation](#body-generation)  
+[Brain Generation](#brain-generation) 
+
+
+## Intro
+Insert video link here: 
+
+Insert gif here:
+
+
+## Body Generation: <a name="body-generation"></a>
 ![IMG_39B3E5731AD0-1](https://user-images.githubusercontent.com/120343561/220268784-290b3f50-5b5e-4d8d-92db-d82f0f293525.jpeg)
 
 Figure 1: Robot Phenotype
 
-Source: Adapted from _Figure 3: Designed examples of genotype graphs and corresponding creature morphologies._ from [1]
+Source: Adapted from _Figure 3: Designed examples of genotype graphs and corresponding creature morphologies_ from [1]
 
 
-### Spine: 
+### Spine: <a name="spine"></a>
 A similar process to the snake body generation was kept: for a randomly generated total number of links (**numLinks**), a random snake in the x-direction was generated:
 1. First link and joints are made (since they are both made using absolute positions
 2. For every other link before the last: joint + link is made (using relative positions)
 3. Last link is made
 
-### Arms:
+### Arms: <a name="arms"></a>
 For each cube in the "snake spine," a random number was generated (0, 1, or 2) for the number of arms attached to the spinal unit. Different cases are listed below:
 1. If 0 arms, a "pass" was implemented.
 2. If 1 arm, another variable, **y_dir** (random int 0 or 1) was used to make the randomized arm in the +y or -y direction of the spinal unit, as well as the joint connecting the new arm to its spinal unit.
@@ -54,6 +66,14 @@ The horse, though, will use its legs to walk forward.
 
 ## Evolution:
 
+## The Parallel Hill Climber
+
 ## References:
 Sims, Karl. “Evolving 3D Morphology and Behavior by Competition.” Artificial Life, vol. 1, no. 4, 1994, pp. 353–372., https://doi.org/10.1162/artl.1994.1.4.353. 
+
+## Results:
+
+Insert graphs here
+
+
 
