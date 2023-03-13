@@ -46,7 +46,7 @@ _Note:_ An arm can't be wider in the x-direction than its spinal unit. Otherwise
 For each arm, a variable called **leg_chance** (random int 0 or 1) randomly decided whether or not the arm would have an attached arm.
 1. If 0 legs, a "pass" was implemented.
 2. If 1 leg, a randomized leg was added to the bottom (-z direction) of the arm, as well as its respective arm-leg joint.
-As can be seen on Figure 1, the formation of legs on each arm of a spinal unit showed pseudo-evolution to a **horse-like creature**.
+As can be seen on Figure 1, the formation of legs on each arm of a spinal unit showed pseudo-evolution to a **horse-like creature**.   
 _Note:_ A leg can't be wider in the y-direction than its arm, and it can't be wider in the x-direction than the spinal unit that arm is connected to.    Otherwise, it would overlap with either of the two.
 ### Brain Generation:
 ![IMG_2B480D5020CD-1](https://user-images.githubusercontent.com/120343561/220411380-6b2ea42c-117f-4dc5-a5ff-a5745487aae9.jpeg)
