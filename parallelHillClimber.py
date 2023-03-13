@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
         os.system("rm brain*.nndf")
+        os.system("rm body*.urdf")
         os.system("rm fitness*.txt")
         self.parents = {}
         self.fitnessValues = np.empty([c.numberOfGenerations+1, c.populationSize])
@@ -28,7 +29,7 @@ class PARALLEL_HILL_CLIMBER:
         self.Spawn()
         self.Mutate()
         self.Evaluate(self.children)
-        self.Print()
+        # self.Print()
         self.Select()
         self.Store_Fitness()
 
@@ -68,6 +69,7 @@ class PARALLEL_HILL_CLIMBER:
                 maxKey = key
         
         self.parents[maxKey].Start_Simulation("GUI")
+
 
     def Evaluate(self, solutions):
         for key in solutions:
