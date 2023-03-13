@@ -3,6 +3,7 @@ import os
 import random
 import time
 import constants as c
+import math
 
 class SOLUTION:
     def __init__(self, nextAvailableID):
@@ -369,39 +370,62 @@ class SOLUTION:
             self.weights[randomRow][randomColumn] = random.random() * 2 - 1
 
         def Mutate_Arm():
+            # Need to change: dimensions + positions of mutated arms, and positions of any joints connecting that arm to its spinal unit
+
             # First, obtain indices of position list that hold the arm links
-            armIndList = []
+            changeArmInds = [] # holds list of [index in the dimension list, index in the position list] of the arms to be changed
             for i in range(len(self.allPosList)):
                 if "_" not in self.allPosList[i][1] and "Arm" in self.allPosList[i][1]:
-                    armIndList.append(i)
+                    pos_ind = i
+                    temp_arm_ind = self.allPosList[i][1].find("Arm")
+                    dim_ind = int(self.allPosList[i][1][(temp_arm_ind+3):]) # find the X in "ArmX" of the name to find the index in the dimension list
+                    changeArmInds.append([dim_ind, pos_ind])
 
             # Randomize number of: arms in which to change sizes
             numChangeArms = random.randint(0, self.armCount)
             if numChangeArms == 0:
                 return
             # Change arms one by one until the number of arms to change (numChangeArms) becomes 0
-            while numChangeArms > 0 and armIndList:
+            while numChangeArms > 0 and changeArmInds:
                 # shuffle order of arm randomization, then choose arm
-                random.shuffle(armIndList)
-                armInd = armIndList.pop()
-                # randomize arm dimensions
-                oldArmDims = self.allPosList[armInd][0]
+                random.shuffle(changeArmInds)
+                armInd = changeArmInds.pop()
+                # make new random arm dimensions, replace old ones
+                oldArmDims = self.armDimsList[armInd[0]]
                 changeX = oldArmDims[0] * (random.random() + 0.5)
-                if changeX > self.allPosList[armInd][2]:
-                    changeX = 0.9 * self.allPosList[armInd][2]
+                if changeX > self.allPosList[armInd[1]][2]:
+                    changeX = 0.9 * self.allPosList[armInd[1]][2]
                 changeY = oldArmDims[1] * (random.random() + 0.5)
                 changeZ = oldArmDims[2] * (random.random() + 0.5)
                 newArmDims = [changeX, changeY, changeZ]
-                self.allPosList[armInd][0] = newArmDims
+                self.armDimsList[armInd[0]] = newArmDims
+                # replace old arm link position with new one
+                y_factor = math.copysign(1, self.allPosList[armInd[1]][0][1])
+                newYPos = newArmDims[1]/2 * y_factor
+                newArmPos = [0, newYPos, 0]
+                self.allPosList[armInd[1]][0] = newArmPos
+                # replace old arm-leg joint position with new one
+                changeJointInds = []
+                for i in range(len(self.allPosList)):
+                    if "Arm" + str(armInd[0]) + "_Leg" in self.allPosList[i][1]:
+                        changeJointInds.append(i)
+                        leg_ind = self.allPosList[i][1].find("Leg") 
+                        leg_num = int(self.allPosList[i][1][(leg_ind+3):]) # get the leg number
+                if len(changeJointInds) > 0:
+                    old_leg_y = self.legDimsList[leg_num][1]
+                    old_joint_pos_y = self.allPosList[changeJointInds[0]][0][1]
+                    y_factor = old_joint_pos_y/(oldArmDims[1]-old_leg_y/2)
+                    changeY = y_factor * (newArmDims[1] - old_leg_y/2) # new joint y: y_factor * (newArmY - oldLegY/2)
+                    changeZ = -newArmDims[2]/2 # new joint z: -newLegZ/2
+                    self.allPosList[changeJointInds[0]][0] = [0, changeY, changeZ]
 
                 # Change the ymax of the leg associated with the changed arm
                 # First, extract the leg connected to the changed arm
                 leg_changedYMax = ""
                 for positionI in self.allPosList:
-                    if "_" in positionI[1] and ("Arm " + str(armInd)) in positionI[1]: #find leg through connected joint
+                    if "_" in positionI[1] and ("Arm " + str(armInd[0])) in positionI[1]: #find leg through connected joint
                         leg_index = positionI[1].find("Leg")
-                        leg_number = positionI[1][leg_index + 3:]
-                        leg_changedYMax = "Leg" + leg_number
+                        leg_changedYMax = positionI[1][leg_index:] # "LegX"
 
                 # change the ymax of the leg
                 for i in range(len(self.allPosList)):
@@ -412,33 +436,53 @@ class SOLUTION:
 
         def Mutate_Leg():
             # First, obtain indices of position list that hold the leg links
-            legIndList = []
+            changeLegInds = [] # holds list of [index in the dimension list, index in the position list] of the legs to be changed
             for i in range(len(self.allPosList)):
                 if "_" not in self.allPosList[i][1] and "Leg" in self.allPosList[i][1]:
-                    legIndList.append(i)
+                    pos_ind = i
+                    temp_leg_ind = self.allPosList[i][1].find("Leg")
+                    dim_ind = int(self.allPosList[i][1][(temp_leg_ind+3):]) # find the X in "ArmX" of the name to find the index in the dimension list
+                    changeLegInds.append([dim_ind, pos_ind])
 
             # Randomize number of: arms in which to change sizes
             numChangeLegs = random.randint(0, self.legCount)
             if numChangeLegs == 0:
                 return
-            # Change arms one by one until the number of arms to change (numChangeArms) becomes 0
-            while numChangeLegs > 0 and legIndList:
+            # Change leg one by one until the number of leg to change (numChangeLegs) becomes 0
+            while numChangeLegs > 0 and changeLegInds:
                 # shuffle order of leg randomization, then choose leg
-                random.shuffle(legIndList)
-                legInd = legIndList.pop()
-                # randomize leg dimensions
-                oldLegDims = self.allPosList[legInd][0]
-                # randomize arm dimensions
-                oldArmDims = self.allPosList[legInd][0]
-                changeX = oldArmDims[0] * (random.random() + 0.5)
-                if changeX > self.allPosList[legInd][2]:
-                    changeX = 0.9 * self.allPosList[legInd][2]
+                random.shuffle(changeLegInds)
+                legInd = changeLegInds.pop()
+                # make new random leg dimensions, replace old ones
+                oldLegDims = self.legDimsList[legInd[0]]
+                changeX = oldLegDims[0] * (random.random() + 0.5)
+                if changeX > self.allPosList[legInd[1]][2]:
+                    changeX = 0.9 * self.allPosList[legInd[1]][2]
                 changeY = oldLegDims[1] * (random.random() + 0.5)
-                if changeY > self.allPosList[legInd][3]:
-                    changeY = 0.9 * self.allPosList[legInd][3]
+                if changeY > self.allPosList[legInd[1]][3]:
+                    changeY = 0.9 * self.allPosList[legInd[1]][3]
                 changeZ = oldLegDims[2] * (random.random() + 0.5)
                 newLegDims = [changeX, changeY, changeZ]
-                self.allPosList[legInd][0] = newLegDims
+                self.legDimsList[legInd[0]] = newLegDims
+
+                # replace old arm link position with new one
+                newZPos = -newLegDims[1]/2
+                newLegPos = [0, 0, newZPos]
+                self.allPosList[legInd[1]][0] = newLegPos
+
+                # replace old arm-leg joint position with new one
+                changeJointInds = []
+                for i in range(len(self.allPosList)):
+                    if "_Leg" + str(legInd[0]) in self.allPosList[i][1]:
+                        changeJointInds.append(i)
+                        armInd = int(self.allPosList[i][1].split("_")[0][3:]) # get the arm index out - we need to acess the armY dim when replacing the joint position
+                if len(changeJointInds) > 0:
+                    old_arm_y = self.armDimsList[armInd][1]
+                    old_arm_z = self.armDimsList[armInd][2]
+                    old_joint_pos_y = self.allPosList[changeJointInds[0]][0][1]
+                    y_factor = old_joint_pos_y/(old_arm_y - oldLegDims[1]/2)
+                    changeY = y_factor * (old_arm_y - newLegDims[1]/2) # new joint y: y_factor * (oldArmY - newLegY/2)
+                    self.allPosList[changeJointInds[0]][0] = [0, changeY, old_arm_z]
 
             numChangeLegs -= 1
 
