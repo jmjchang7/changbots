@@ -482,7 +482,7 @@ class SOLUTION:
                     old_joint_pos_y = self.allPosList[changeJointInds[0]][0][1]
                     y_factor = old_joint_pos_y/(old_arm_y - oldLegDims[1]/2)
                     changeY = y_factor * (old_arm_y - newLegDims[1]/2) # new joint y: y_factor * (oldArmY - newLegY/2)
-                    self.allPosList[changeJointInds[0]][0] = [0, changeY, old_arm_z]
+                    self.allPosList[changeJointInds[0]][0] = [0, changeY, -old_arm_z/2]
 
             numChangeLegs -= 1
 
