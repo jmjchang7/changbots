@@ -13,16 +13,16 @@ runTime = 4000
 
 mutator = 0.05
 
-numSeeds = 1
+numSeeds = 5
 
 amplitude = numpy.pi/4
 frequency = 10
 phaseOffset = 0.2
 
-numberOfGenerations = 1
-populationSize = 1
+numberOfGenerations = 5
+populationSize = 2
 
-numLinks = random.randint(2, 5)
+numLinks = random.randint(3, 5)
 numJoints = numLinks - 1
 
 numSensorNeurons = random.randint(1, numLinks-1)
