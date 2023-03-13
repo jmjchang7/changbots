@@ -32,14 +32,14 @@ Source: Adapted from _Figure 3: Designed examples of genotype graphs and corresp
 A similar process to the snake body generation was kept: for a randomly generated total number of links (**numLinks**), a random snake in the x-direction was generated:
 1. First link and joints are made (since they are both made using absolute positions)
 2. For every other link before the last: a joint + link pair is made (using relative positions)
-3. Last link is made
+3. The last link is made.      
 This creates the spine of the snake, which can be seen extending in the x-axis of the figure above.
 
 ### Arms:
 For each cube in the "snake spine," a random number was generated (0, 1, or 2) for the number of arms attached to the spinal unit. Different cases are listed below:
 1. If 0 arms, a "pass" was implemented.
 2. If 1 arm, another variable, **y_dir** (random int 0 or 1) was used to make the randomized arm in the +y or -y direction of the spinal unit, as well as the joint connecting the new arm to its spinal unit.
-4. If 2 arms, randomized arms were made in both the +y and -y directions of the spinal unit, as well as their respective joints.
+4. If 2 arms, randomized arms were made in both the +y and -y directions of the spinal unit, as well as their respective joints.  
 As can be seen on Figure 1, the formation of 2 arms on a spinal unit showed pseudo-evolution to a **lizard-like creature**.
 
 ### Legs:
@@ -74,8 +74,13 @@ The lizard will do the same.
 The horse, though, will use its legs to walk forward.
 
 ## Evolution:
+Evolution works via a series of random mutations.  
+![IMG_F43951E6EDD1-1](https://user-images.githubusercontent.com/120343561/224627996-06f83c8a-b5db-460b-8fc3-82f1ca33bf22.jpeg)
+Figure 3: Robot Mutation
 
 ## The Parallel Hill Climber
+![IMG_C5E75C24F3BB-1](https://user-images.githubusercontent.com/120343561/224628231-ac589ffc-468e-4377-988e-dc0868a6715b.jpeg)
+Figure 4: Parallel Hill Climber mechanism
 
 ## Results:
 
