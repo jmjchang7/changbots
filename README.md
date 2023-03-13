@@ -76,6 +76,7 @@ Evolution occurs via a series of random mutations.
 ![IMG_F43951E6EDD1-1](https://user-images.githubusercontent.com/120343561/224627996-06f83c8a-b5db-460b-8fc3-82f1ca33bf22.jpeg)
 Figure 3: Robot Mutation
 
+
 Mutations occur during each generation, from the parent to the child. In this section, the evolution from one parent to its child will be outlined. In the next section, the bigger-picture process of evolution across time in the entire population will be described (aka the Parallel Hill Climber).
 
 Mutations can occur in two ways:
@@ -92,6 +93,7 @@ Evolution occurs when **the fitness of the child is greater than that of the par
 ## The Parallel Hill Climber
 ![IMG_C5E75C24F3BB-1](https://user-images.githubusercontent.com/120343561/224628231-ac589ffc-468e-4377-988e-dc0868a6715b.jpeg)
 Figure 4: Parallel Hill Climber mechanism
+
 
 The parallel hill climber model is the means by which changbots evolve.
 1. An initial population is created. Say 5 random robots. We call these the first **parents**, Generation 1.
