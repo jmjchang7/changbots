@@ -6,34 +6,11 @@ import constants as c
 
 class SOLUTION:
     def __init__(self, nextAvailableID):
-        self.weights = [[random.random() * 2 - 1 for _ in range(c.numMotorNeurons)] for _ in range(c.numSensorNeurons)]
         self.myID = nextAvailableID
-
-    def Start_Simulation(self, directOrGUI):
-        self.Create_World()
-        self.Create_Body()
-        self.Send_Body()
-        self.Send_Brain()
-        os.system("python3 simulate.py " + directOrGUI + " " + str(self.myID) + " 2&>1 &")
-
-    def Wait_For_Simulation_To_End(self):
-        while not os.path.exists("fitness" + str(self.myID) + ".txt"):
-            time.sleep(0.001)
-        fitnessFile = open("fitness" + str(self.myID) + ".txt", "r")
-        self.fitness = float(fitnessFile.read())
-        fitnessFile.close()
-        os.system("rm fitness" + str(self.myID) + ".txt")
-
-    def Create_World(self):
-        pyrosim.Start_SDF("world.sdf")
-        pyrosim.Send_Cube(name="Block", pos=[-2,-2,0.5], size=[1,1,1])
-        pyrosim.End()
-
-    def Create_Body(self):
         # initialize variables
         self.startX,self.startY,self.startZ = 0,0,3
         self.dimensionsList = [] #list of lists that holds dimensions for each cube in order. For example, 0 index is [x dim, y dim, z dim]
-        self.positionsList = [] #list of ([position list], "Name") that holds positions and name of each cube AND link in order. 
+        self.positionsList = [] #list of ([pos_x, pos_y, pos_z], "Name") that holds positions and name of each cube AND link in order. 
         
         self.armList = [0] * c.numLinks # list of how many arms each snake link has
         for i in range(c.numLinks):
@@ -90,17 +67,75 @@ class SOLUTION:
                 self.positionsList.append([[sizeX/2, 0, 0], "Link" + str(self.linkCount)]) #last link (has no next joint)
 
                 self.Make_Arm(linkN, sizeX, sizeY) # make arm(s)
+            
+            # TEST - RANDOMIZE EVERYTHING IN CONSTRUCTOR
+            # now actually make the "Cubes" and "Joints"
+            # SENSOR LISTS FOR ARMS
+            self.armSensorList = []
+            for i in range(len(self.armDimsList)):
+                self.armSensorList.append(random.randint(0, 1))
+
+            self.legSensorList = []
+            for i in range(len(self.legDimsList)):
+                self.legSensorList.append(random.randint(0, 1))
+
+
+            self.allPosList = self.positionsList + self.armPosList + self.legPosList
+            self.allSensorList = c.SensorIndexList + self.armSensorList + self.legSensorList
+
+            # send sensor and motor neurons
+            self.numJoints = 0
+            neuronCount = 0
+            currentLink = 0
+            for positionI in self.allPosList:
+                    if "_" not in positionI[1]: # checks if it's a Link
+                        if self.allSensorList[currentLink] == 1: #check if it should be a sensor
+                            # pyrosim.Send_Sensor_Neuron(name = neuronCount, linkName = positionI[1])
+                            neuronCount += 1
+                        currentLink += 1
+            for positionI in self.allPosList:
+                    if "_" in positionI[1]: # checks if it's a Joint
+                        # pyrosim.Send_Motor_Neuron( name = neuronCount, jointName = positionI[1])
+                        self.numJoints += 1
+                        neuronCount += 1
+            
+            numSensors = self.allSensorList.count(1)
+            numMotors = self.numJoints
+            self.weights = [[random.random() * 2 - 1 for _ in range(numMotors)] for _ in range(numSensors)]
+
+    def Start_Simulation(self, directOrGUI):
+        self.Create_World()
+        self.Create_Body()
+        self.Send_Body()
+        self.Send_Brain()
+        os.system("python3 simulate.py " + directOrGUI + " " + str(self.myID) + " 2&>1 &")
+
+    def Wait_For_Simulation_To_End(self):
+        while not os.path.exists("fitness" + str(self.myID) + ".txt"):
+            time.sleep(0.01)
+        fitnessFile = open("fitness" + str(self.myID) + ".txt", "r")
+        self.fitness = float(fitnessFile.read())
+        fitnessFile.close()
+        os.system("rm fitness" + str(self.myID) + ".txt")
+
+    def Create_World(self):
+        pyrosim.Start_SDF("world.sdf")
+        pyrosim.Send_Cube(name="Block", pos=[-2,-2,0.5], size=[1,1,1])
+        pyrosim.End()
+
+    def Create_Body(self):
+        pass
 
     def Send_Body(self):
         # now actually make the "Cubes" and "Joints"
         # SENSOR LISTS FOR ARMS
-        self.armSensorList = []
-        for i in range(len(self.armDimsList)):
-            self.armSensorList.append(random.randint(0, 1))
+        # self.armSensorList = []
+        # for i in range(len(self.armDimsList)):
+        #     self.armSensorList.append(random.randint(0, 1))
 
-        self.legSensorList = []
-        for i in range(len(self.legDimsList)):
-            self.legSensorList.append(random.randint(0, 1))   
+        # self.legSensorList = []
+        # for i in range(len(self.legDimsList)):
+        #     self.legSensorList.append(random.randint(0, 1))   
 
         for linkN in range(c.numLinks-1):
             pyrosim.Start_URDF("body" + str(self.myID) + ".urdf")
@@ -145,8 +180,9 @@ class SOLUTION:
     def Send_Brain(self):
         pyrosim.Start_NeuralNetwork("brain" + str(self.myID) + ".nndf")
 
-        self.allPosList = self.positionsList + self.armPosList + self.legPosList
-        self.allSensorList = c.SensorIndexList + self.armSensorList + self.legSensorList
+        # self.allPosList = self.positionsList + self.armPosList + self.legPosList
+        # self.allSensorList = c.SensorIndexList + self.armSensorList + self.legSensorList
+        self.numJoints = 0 # for counting all joints (to make motors later)
 
         # send sensor and motor neurons
         neuronCount = 0
@@ -160,20 +196,26 @@ class SOLUTION:
         for positionI in self.allPosList:
                 if "_" in positionI[1]: # checks if it's a Joint
                     pyrosim.Send_Motor_Neuron( name = neuronCount, jointName = positionI[1])
+                    self.numJoints += 1
                     neuronCount += 1
         
-        for currentRow in range(c.numSensorNeurons):
-            for currentColumn in range(c.numMotorNeurons):
-                pyrosim.Send_Synapse(sourceNeuronName = currentRow , targetNeuronName = currentColumn + c.numSensorNeurons , weight = self.weights[currentRow][currentColumn])
+        numSensors = self.allSensorList.count(1)
+        numMotors = self.numJoints
+        # self.weights = [[random.random() * 2 - 1 for _ in range(numMotors)] for _ in range(numSensors)]
+        
+        for currentRow in range(numSensors):
+            for currentColumn in range(numMotors):
+                pyrosim.Send_Synapse(sourceNeuronName = currentRow , targetNeuronName = currentColumn + numSensors , weight = self.weights[currentRow][currentColumn])
         pyrosim.End()
 
     def Mutate(self):
-        randomRow = random.randint(0, c.numSensorNeurons-1)
-        randomColumn = random.randint(0, c.numMotorNeurons-1)
+        # randomRow = random.randint(0, c.numSensorNeurons-1)
+        # randomColumn = random.randint(0, c.numMotorNeurons-1)
 
-        self.weights[randomRow][randomColumn] = random.random() * 2 - 1
+        # self.weights[randomRow][randomColumn] = random.random() * 2 - 1
 
-        c.mutator *= random.random() + 0.1
+        # c.mutator += 0.01
+        pass
 
     def Set_ID(self, nextAvailableID):
         self.myID = nextAvailableID
