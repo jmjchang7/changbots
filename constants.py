@@ -11,7 +11,7 @@ runTime = 4000
 # frequency_FL = 50
 # phaseOffset_FL = numpy.pi/2
 
-mutator = 0.3
+mutator = 0.05
 
 numSeeds = 1
 
