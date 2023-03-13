@@ -8,7 +8,7 @@
 * [Brain Generation](#brain-generation)
 * [Morphospace](#morphospace)
 * [Evolution](#evolution)
-* [The Parallel Hill Climber (the bigger picture of evolution)](#the-parallel-hill-climber-(the_bigger_picture_of_evolution))
+* [The Parallel Hill Climber](#the-parallel-hill-climber)
 * [Results](#results)
 * [References](#references)
 
@@ -101,7 +101,7 @@ Evolution occurs when **the fitness of the child is greater than that of the par
 
 
 
-## The Parallel Hill Climber (the bigger picture of evolution)
+## The Parallel Hill Climber
 ![IMG_C5E75C24F3BB-1](https://user-images.githubusercontent.com/120343561/224628231-ac589ffc-468e-4377-988e-dc0868a6715b.jpeg)
 Figure 4: Parallel Hill Climber mechanism
 
