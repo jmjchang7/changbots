@@ -11,6 +11,7 @@
 * [The Parallel Hill Climber](#the-parallel-hill-climber)
 * [Results](#results)
 * [References](#references)
+* [Extra Fun Evolved Creatures!](#extra-fun-evolved-creatures!)
 
 
 ## Intro
@@ -131,6 +132,10 @@ Insert graphs here
 
 ## References:
 Sims, Karl. “Evolving 3D Morphology and Behavior by Competition.” Artificial Life, vol. 1, no. 4, 1994, pp. 353–372., https://doi.org/10.1162/artl.1994.1.4.353. 
+
+## Extra Fun Evolved Creatures!:
+
+Insert gif links here:
 
 
 
