@@ -24,7 +24,8 @@ And here's a video summary, if you don't wanna read the details 😩
 
 <a href="https://www.youtube.com/watch?v=gMaUwJvYOIA">
   <img src="https://img.youtube.com/vi/gMaUwJvYOIA/maxresdefault.jpg" alt="VIDEO_TITLE">
-</a>
+</a>  
+
 [changbot video presentation](https://youtu.be/gMaUwJvYOIA)
 
 This project could not have been done without:
