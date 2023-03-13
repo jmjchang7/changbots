@@ -17,6 +17,7 @@
 Welcome to Changbots!
 
 Here's a little sneak preview of what's contained in this project:
+  
 ![ludo final project gif](https://user-images.githubusercontent.com/120343561/224799303-6a2a944e-c541-4eff-a32e-a1187b678291.gif)
 
 And here's a video summary, if you don't wanna read the details 😩
