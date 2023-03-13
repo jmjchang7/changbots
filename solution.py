@@ -466,7 +466,7 @@ class SOLUTION:
                 self.legDimsList[legInd[0]] = newLegDims
 
                 # replace old arm link position with new one
-                newZPos = -newLegDims[1]/2
+                newZPos = -newLegDims[2]/2
                 newLegPos = [0, 0, newZPos]
                 self.allPosList[legInd[1]][0] = newLegPos
 
