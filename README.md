@@ -3,7 +3,9 @@
 ## Body Generation:
 ![IMG_39B3E5731AD0-1](https://user-images.githubusercontent.com/120343561/220268784-290b3f50-5b5e-4d8d-92db-d82f0f293525.jpeg)
 
+Figure 1: Robot Phenotype
 
+Source: Adapted from _Figure 3: Designed examples of genotype graphs and corresponding creature morphologies._ from [1]
 
 
 ### Spine: 
@@ -28,6 +30,11 @@ As can be seen on the diagram, the formation of legs on each arm of a spinal uni
 ## Brain Generation:
 ![IMG_2B480D5020CD-1](https://user-images.githubusercontent.com/120343561/220411380-6b2ea42c-117f-4dc5-a5ff-a5745487aae9.jpeg)
 
+Figure 2: Robot Genetic Storage and Brain Synapse Construction
+
+Source: Adapted from _Figure 6b: The phenotype "brain"..._ from [1]
+
+
 The brain is made of a netowrk of synapses, connecting sensor and motor neurons of the creature.
 1. A random subset of all links (spinal units, arms, and legs) is chosen to be sensor neurons.
 2. ALL joints are motor neurons.
@@ -46,7 +53,7 @@ The lizard will do the same.
 The horse, though, will use its legs to walk forward.
 
 ## Evolution:
-![IMG_513E169B6442-1](https://user-images.githubusercontent.com/120343561/222047972-49510b1e-adfc-4505-a580-d233f10cd555.jpeg)
 
-The spinal units are mutated by a mutator factor, which changes their size. This factor is changed during each generation. This has a possibility of improving the movement of the creature.
+## References:
+Sims, Karl. “Evolving 3D Morphology and Behavior by Competition.” Artificial Life, vol. 1, no. 4, 1994, pp. 353–372., https://doi.org/10.1162/artl.1994.1.4.353. 
 
