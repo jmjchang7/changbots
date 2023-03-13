@@ -8,7 +8,7 @@
 * [Brain Generation](#brain-generation)
 * [Morphospace](#morphospace)
 * [Evolution](#evolution)
-* [The Parallel Hill Climber (the bigger picture of evolution)](#the-parallel-hill-climber-(the-bigger-picture-of-evolution))
+* [The Parallel Hill Climber (the bigger picture of evolution)](#the-parallel-hill-climber-(the bigger picture of evolution))
 * [Results](#results)
 * [References](#references)
 
