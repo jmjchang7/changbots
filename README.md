@@ -1,4 +1,4 @@
-# changbots
+# changbots: evolutionary robots
 
 ### Table of Contents  
 * [Intro](#intro)
@@ -16,11 +16,18 @@
 ## Intro
 Welcome to Changbots!
 
-Here's a little sneak preview of what's contained in this project:
+Here's a little teaser of what's contained in this project:
   
 ![ludo final project gif](https://user-images.githubusercontent.com/120343561/224799303-6a2a944e-c541-4eff-a32e-a1187b678291.gif)
 
 And here's a video summary, if you don't wanna read the details 😩
+Insert video link here:
+
+This project could not have been done without:
+1. r/ludobots, https://www.reddit.com/r/ludobots/, and
+2. pyrosim, https://www.thunderheadeng.com/pyrosim
+
+The methods of robot building and evolving are built on methods used in the first source, and the second source allowed for the use of a 3D-graphical interface with which to present the visual results.
 
 
 ## Body Generation:
