@@ -49,7 +49,7 @@ Figure 2: Robot Genetic Storage and Brain Synapse Construction
 Source: Adapted from _Figure 6b: The phenotype "brain"..._ from [1]
 
 
-The brain is made of a netowrk of synapses, connecting sensor and motor neurons of the creature.
+The brain is made of a network of synapses, connecting sensor and motor neurons of the creature.
 1. A random subset of all links (spinal units, arms, and legs) is chosen to be sensor neurons.
 2. ALL joints are motor neurons.
 3. The sensor identity is stored in respective lists for each category (spinal unit, arm, or leg). After constructing the whole creature, this list is iterated through in order to make the brain network, as shown in the diagram above.
@@ -67,6 +67,7 @@ The lizard will do the same.
 The horse, though, will use its legs to walk forward.
 
 ### Evolution:
+
 
 ### The Parallel Hill Climber
 
