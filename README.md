@@ -23,6 +23,10 @@ Here's a little teaser of what's contained in this project:
 And here's a video summary, if you don't wanna read the details 😩   
 [changbot video presentation](https://youtu.be/gMaUwJvYOIA)
 
+<a href="https://www.youtube.com/watch?v=gMaUwJvYOIA">
+  <img src="https://img.youtube.com/vi/gMaUwJvYOIA/maxresdefault.jpg" alt="VIDEO_TITLE">
+</a>
+
 This project could not have been done without:
 1. r/ludobots, https://www.reddit.com/r/ludobots/, and
 2. pyrosim, https://www.thunderheadeng.com/pyrosim
