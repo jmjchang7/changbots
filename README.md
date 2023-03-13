@@ -16,7 +16,7 @@
 ## Intro
 Insert video link here: 
 
-Insert gif here:
+![ludo final project gif](https://user-images.githubusercontent.com/120343561/224799303-6a2a944e-c541-4eff-a32e-a1187b678291.gif)
 
 
 ## Body Generation:
