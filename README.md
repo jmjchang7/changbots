@@ -155,7 +155,8 @@ In order to run changbots, first:
 1. Download this repository.
 2. Then, run the "button.py" file.
 3. If you want to play with any of the parameters of the evolution (such as number of generations, population size, number of seeds, etc.), find the "constants.py" folder.
-4. Enjoy!
+4. Enjoy!   
+Note: changbots was made on macOS -> if you use Windows, there are a couple details in the solution.py, robot.py, and parallelHillClimber.py files regarding file reading/deletion that you'll have to briefly tweak (should take about 1 min). Contact me if you are not able to fix them!
 
 
 ## References:
