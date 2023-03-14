@@ -10,7 +10,9 @@
 * [Morphospace](#morphospace)
 * [Evolution](#evolution)
 * [The Parallel Hill Climber](#the-parallel-hill-climber)
-* [Results-(Plots)](#results-(plots))
+* [Results](#results-(plots))
+    - [Plots](#plots)
+    - [gifs](#gifs)
 * [References](#references)
 * [Extra Fun Evolved Creatures](#extra-fun-evolved-creatures)
 
@@ -122,22 +124,30 @@ The parallel hill climber model is the means by which changbots evolve.
 6. The most fit robot of all is selected as the **best robot**. 
 7. This whole process can be repeated! Each run of the parallel hill climber is called a **seed**. So if there were 5 seeds, imagine 5 of these diagrams running each after the other.
 
-## Results (Plots):
+## Results:
 The simulation was run for 5 seeds on two occasions, totaling to 10 seeds. Each run contained a population size of 10, and lasted for 50 generations.
 The total amount of times run thus amounted to: 10 pop x 100 gen x 10 seeds = 10,000 simulations.  
    
 Each 10 pop x 10 gen run took about 2 minutes, so the total time was around 200 minutes, or 3 hours and 20 minutes.
 50,000 simulations would have taken around 16 hours and 40 minutes. This was not realistic for me to run, as I had to use my computer to study for other finals before the project deadline 😭. However, a good representation of the evolution process was still shown.
+
+### Plots:
   
 ![evolutioncurves1](https://user-images.githubusercontent.com/120343561/224872640-ae0872f2-e0ae-4f52-943a-c6dd0030e1ac.png)   
 Figure 5: Evolution curves, Seeds 1-5
 
+
+### gifs:
+
+![final evolved 1](https://user-images.githubusercontent.com/120343561/224875776-d426d873-5e27-465a-b17f-a9f8cf8a1ae9.gif)
+
+![final evolved 2](https://user-images.githubusercontent.com/120343561/224875844-b9c88d68-314d-4b2e-a500-8a0ced536949.gif)
+
+
+
+
 ## References:
 Sims, Karl. “Evolving 3D Morphology and Behavior by Competition.” Artificial Life, vol. 1, no. 4, 1994, pp. 353–372., https://doi.org/10.1162/artl.1994.1.4.353. 
-
-## Extra Fun Evolved Creatures:
-
-Insert gif links here:
 
 
 
