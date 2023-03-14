@@ -140,12 +140,12 @@ Figure 5: Evolution curves, Seeds 1-5
    
 ### gifs:
    
-Creatures 1-5:   
-![final evolved 1](https://user-images.githubusercontent.com/120343561/224875776-d426d873-5e27-465a-b17f-a9f8cf8a1ae9.gif) ![final evolved 2](https://user-images.githubusercontent.com/120343561/224875844-b9c88d68-314d-4b2e-a500-8a0ced536949.gif) ![final evolved 3](https://user-images.githubusercontent.com/120343561/224876984-0cdaf865-b881-4605-868e-13e1b7689286.gif)
+Creatures 1, 2, 3, 5 (4 is shown in intro gif):   
+![final evolved 1](https://user-images.githubusercontent.com/120343561/224875776-d426d873-5e27-465a-b17f-a9f8cf8a1ae9.gif) ![final evolved 2](https://user-images.githubusercontent.com/120343561/224875844-b9c88d68-314d-4b2e-a500-8a0ced536949.gif) ![final evolved 3](https://user-images.githubusercontent.com/120343561/224876984-0cdaf865-b881-4605-868e-13e1b7689286.gif) ![final evolved 5](https://user-images.githubusercontent.com/120343561/224877804-7794d6a7-b4a4-4005-b661-871ed6146fb7.gif)
 
 
 
-
+Creatures 6, 7, 8, 9;
 
 ## References:
 Sims, Karl. “Evolving 3D Morphology and Behavior by Competition.” Artificial Life, vol. 1, no. 4, 1994, pp. 353–372., https://doi.org/10.1162/artl.1994.1.4.353. 
