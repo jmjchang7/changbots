@@ -11,18 +11,16 @@ runTime = 4000
 # frequency_FL = 50
 # phaseOffset_FL = numpy.pi/2
 
-mutator = 0.05
-
 numSeeds = 1
 
 amplitude = numpy.pi/4
 frequency = 10
 phaseOffset = 0.2
 
-numberOfGenerations = 5
-populationSize = 2
+numberOfGenerations = 1
+populationSize = 1
 
-numLinks = random.randint(3, 5)
+numLinks = random.randint(2, 5)
 numJoints = numLinks - 1
 
 numSensorNeurons = random.randint(1, numLinks-1)
