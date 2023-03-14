@@ -1,5 +1,4 @@
 # changbots: evolutionary robots
-(Engineer, 44 pts)
 
 ### Table of Contents  
 * [Intro](#intro)
