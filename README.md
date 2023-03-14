@@ -132,8 +132,8 @@ Each 10 pop x 10 gen run took about 2 minutes, so the total time was around 200 
    
       
 ### Plots:
-![evolutioncurves1](https://user-images.githubusercontent.com/120343561/224872640-ae0872f2-e0ae-4f52-943a-c6dd0030e1ac.png)   
-Figure 5: Evolution curves, Seeds 1-5   
+![evolcurves 001](https://user-images.githubusercontent.com/120343561/224923998-09b8cdef-75d5-42f8-83f5-63abf1927f60.png)   
+Figure 5: Evolution curves, Seeds 1-5 (plot 1), Seeds 6-10 (plot 2)   
    
    
    
@@ -145,7 +145,7 @@ Creatures 1, 2, 3, 5 (4 is shown in intro gif):
 
 
 Creatures 6, 7 (8-10 showed similar behavior):   
-![final evolved 6](https://user-images.githubusercontent.com/120343561/224880120-1218c065-3b7e-4126-b524-4604b5824beb.gif) ![final evolved 7](https://user-images.githubusercontent.com/120343561/224900830-ffe23c9e-c2e5-4fff-b570-88ade0b8e5fd.gif)
+![final evolved 6](https://user-images.githubusercontent.com/120343561/224880120-1218c065-3b7e-4126-b524-4604b5824beb.gif) ![final evolved 7](https://user-images.githubusercontent.com/120343561/224900830-ffe23c9e-c2e5-4fff-b570-88ade0b8e5fd.gif) 
     
 Note: 7 is lifted to show that the limbs are attached correctly (initially appears like they overlap due to the joint movement)
 
