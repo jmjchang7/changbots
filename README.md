@@ -131,9 +131,8 @@ Each 10 pop x 10 gen run took about 2 minutes, so the total time was around 200 
 50,000 simulations would have taken around 16 hours and 40 minutes. This was not realistic for me to run, as I had to use my computer to study for other finals before the project deadline 😭. However, a good representation of the evolution process was still shown.   
    
       
-### Plots:
-
-![evolcurves 001](https://user-images.githubusercontent.com/120343561/224923998-09b8cdef-75d5-42f8-83f5-63abf1927f60.png)   
+### Plots:   
+<img width="971" alt="evolcurves" src="https://user-images.githubusercontent.com/120343561/224925681-f5b147f1-8c05-4acb-96b7-58d30f8c6f29.png"> 
    
 Figure 5: Evolution curves, Seeds 1-5 (plot 1), Seeds 6-10 (plot 2)   
    
