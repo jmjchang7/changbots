@@ -14,7 +14,6 @@
     - [Plots](#plots)
     - [gifs](#gifs)
 * [References](#references)
-* [Extra Fun Evolved Creatures](#extra-fun-evolved-creatures)
 
 
 ## Intro
