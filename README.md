@@ -135,6 +135,8 @@ Each 10 pop x 10 gen run took about 2 minutes, so the total time was around 200 
 <img width="971" alt="evolcurves" src="https://user-images.githubusercontent.com/120343561/224925681-f5b147f1-8c05-4acb-96b7-58d30f8c6f29.png"> 
    
 Figure 5: Evolution curves, Seeds 1-5 (plot 1), Seeds 6-10 (plot 2)   
+
+In the evolution time span of the results, it could be seen that the fitness was around 20. This resulted in pretty good locomotive behavior, as can be seen in the gifs below. Interestingly, all of the creatures after this amount of evolution seemed to be pretty big. They all had around 4-5 spinal units, rather than 2-3. While big creatures are cool, when I ran changbots with a smaller evolution span (around 10-50 generations), there was a more visually appealing, simple locomotion that seemed to die out. One reason this might've occurred is due to the bigger size of the creatures with more spinal units. Since they're bigger, they could be sensed further out from the origin, signalling a greater fitness, even if they didn't move as much as the smaller creatures did. Despite this, there was a lot of diverse behavior in the changbots! See below.
    
    
 ### gifs:
