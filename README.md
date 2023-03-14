@@ -145,8 +145,8 @@ Creatures 1, 2, 3, 5 (4 is shown in intro gif):
 
 
 
-Creatures 6, 8, 9, 10:    
-![final evolved 6](https://user-images.githubusercontent.com/120343561/224880120-1218c065-3b7e-4126-b524-4604b5824beb.gif)
+Creatures 6, 7, 8w, 10:   
+![final evolved 6](https://user-images.githubusercontent.com/120343561/224880120-1218c065-3b7e-4126-b524-4604b5824beb.gif) ![final evolved 7](https://user-images.githubusercontent.com/120343561/224900830-ffe23c9e-c2e5-4fff-b570-88ade0b8e5fd.gif)
 
 ## References:
 Sims, Karl. “Evolving 3D Morphology and Behavior by Competition.” Artificial Life, vol. 1, no. 4, 1994, pp. 353–372., https://doi.org/10.1162/artl.1994.1.4.353. 
