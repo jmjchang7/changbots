@@ -14,6 +14,7 @@
     - [Plots](#plots)
     - [gifs](#gifs)
 * [References](#references)
+* [How to Run Changbots](#how-to-run-changbots)
 
 
 ## Intro
@@ -148,6 +149,13 @@ Creatures 1, 2, 3, 5 (4 is shown in intro gif):
 
 Creatures 6, 10 (7-9 showed similar behavior):   
 ![final evolved 6](https://user-images.githubusercontent.com/120343561/224880120-1218c065-3b7e-4126-b524-4604b5824beb.gif) ![final evolved 10](https://user-images.githubusercontent.com/120343561/224926418-35e753d4-54fd-4b84-9957-6970f44cd52b.gif)
+
+## How to Run Changbots:
+In order to run changbots, first:
+1. Download this repository.
+2. Then, run the "button.py" file.
+3. If you want to play with any of the parameters of the evolution (such as number of generations, population size, number of seeds, etc.), find the "constants.py" folder.
+4. Enjoy!
 
 
 ## References:
