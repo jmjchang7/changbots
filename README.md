@@ -133,7 +133,6 @@ Each 10 pop x 10 gen run took about 2 minutes, so the total time was around 200 
    
       
 ### Plots:
-  
 ![evolutioncurves1](https://user-images.githubusercontent.com/120343561/224872640-ae0872f2-e0ae-4f52-943a-c6dd0030e1ac.png)   
 Figure 5: Evolution curves, Seeds 1-5   
    
