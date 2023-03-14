@@ -146,6 +146,8 @@ Creatures 1, 2, 3, 5 (4 is shown in intro gif):
 
 Creatures 6, 7 (8-10 showed similar behavior):   
 ![final evolved 6](https://user-images.githubusercontent.com/120343561/224880120-1218c065-3b7e-4126-b524-4604b5824beb.gif) ![final evolved 7](https://user-images.githubusercontent.com/120343561/224900830-ffe23c9e-c2e5-4fff-b570-88ade0b8e5fd.gif)
+    
+Note: 7 is lifted to show that the limbs are attached correctly (initially appears like they overlap due to the joint movement)
 
 ## References:
 Sims, Karl. “Evolving 3D Morphology and Behavior by Competition.” Artificial Life, vol. 1, no. 4, 1994, pp. 353–372., https://doi.org/10.1162/artl.1994.1.4.353. 
