@@ -13,8 +13,8 @@
 * [Results](#results-(plots))
     - [Plots](#plots)
     - [gifs](#gifs)
-* [References](#references)
 * [How to Run Changbots](#how-to-run-changbots)
+* [References](#references)
 
 
 ## Intro
