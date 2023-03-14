@@ -145,7 +145,7 @@ Creatures 1, 2, 3, 5 (4 is shown in intro gif):
 
 
 
-Creatures 6, 8, 9, 10:
+Creatures 6, 8, 9, 10:    
 ![final evolved 6](https://user-images.githubusercontent.com/120343561/224880120-1218c065-3b7e-4126-b524-4604b5824beb.gif)
 
 ## References:
