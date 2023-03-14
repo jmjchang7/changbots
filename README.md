@@ -10,7 +10,7 @@
 * [Morphospace](#morphospace)
 * [Evolution](#evolution)
 * [The Parallel Hill Climber](#the-parallel-hill-climber)
-* [Results](#results-(plots))
+* [Results-(Plots)](#results-(plots))
 * [References](#references)
 * [Extra Fun Evolved Creatures](#extra-fun-evolved-creatures)
 
