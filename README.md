@@ -141,10 +141,8 @@ Figure 5: Evolution curves, Seeds 1-5
 ### gifs:
    
 Creatures 1-5:   
+![final evolved 1](https://user-images.githubusercontent.com/120343561/224875776-d426d873-5e27-465a-b17f-a9f8cf8a1ae9.gif) ![final evolved 2](https://user-images.githubusercontent.com/120343561/224875844-b9c88d68-314d-4b2e-a500-8a0ced536949.gif) ![final evolved 3](https://user-images.githubusercontent.com/120343561/224876984-0cdaf865-b881-4605-868e-13e1b7689286.gif)
 
-
-
-![final evolved 1](final_evolved_1.gif "title-1") ![final evolved 2](final_evolved_2.gif "title-2")
 
 
 
