@@ -10,7 +10,7 @@
 * [Morphospace](#morphospace)
 * [Evolution](#evolution)
 * [The Parallel Hill Climber](#the-parallel-hill-climber)
-* [Results](#results)
+* [Results](#results-(plots))
 * [References](#references)
 * [Extra Fun Evolved Creatures](#extra-fun-evolved-creatures)
 
@@ -122,7 +122,7 @@ The parallel hill climber model is the means by which changbots evolve.
 6. The most fit robot of all is selected as the **best robot**. 
 7. This whole process can be repeated! Each run of the parallel hill climber is called a **seed**. So if there were 5 seeds, imagine 5 of these diagrams running each after the other.
 
-## Results:
+## Results (Plots):
 The simulation was run for 5 seeds on two occasions, totaling to 10 seeds. Each run contained a population size of 10, and lasted for 50 generations.
 The total amount of times run thus amounted to: 10 pop x 100 gen x 10 seeds = 10,000 simulations.  
    
